@@ -7,55 +7,57 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.example.atul.arsenal.AppController;
 import com.example.atul.arsenal.R;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import Utils.AFTVObject;
 import Utils.ContactInfo;
 
 import static android.content.ContentValues.TAG;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
-    private List<ContactInfo> contactList;
-
-    public ContactAdapter(List<ContactInfo> list) {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.AFTVViewHolder> {
+    private ArrayList<AFTVObject> videoList;
+    public ContactAdapter( ArrayList<AFTVObject> list) {
         Log.d(TAG, "ContactAdapter: " + list);
-        contactList = list;
+        videoList = list;
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return videoList.size();
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        ContactInfo ci = contactList.get(i);
-        contactViewHolder.vName.setText(ci.name);
-        contactViewHolder.vSurname.setText(ci.surname);
-        contactViewHolder.vEmail.setText(ci.email);
-        contactViewHolder.vTitle.setText(ci.name + " " + ci.surname);
+    public void onBindViewHolder(AFTVViewHolder aftvViewHolder, int i) {
+        AFTVObject object = videoList.get(i);
+        Log.v( "JSON1: ", object.getTitle());
+        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        aftvViewHolder.title.setText(object.getTitle());
+        aftvViewHolder.thumbnail.setImageUrl(object.getHighPosterURL(), imageLoader);
     }
 
     @Override
-    public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AFTVViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.card_layout, parent, false);
-        return new ContactViewHolder(itemView);
+        return new AFTVViewHolder(itemView);
     }
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder {
-        protected TextView vName;
-        protected TextView vSurname;
-        protected TextView vEmail;
-        protected TextView vTitle;
+    public static class AFTVViewHolder extends RecyclerView.ViewHolder {
+        protected TextView title;
+        protected NetworkImageView thumbnail;
 
-        public ContactViewHolder(View v) {
+        public AFTVViewHolder(View v) {
             super(v);
-            vName =  (TextView) v.findViewById(R.id.txtName);
-            vSurname = (TextView)  v.findViewById(R.id.txtSurname);
-            vEmail = (TextView)  v.findViewById(R.id.txtEmail);
-            vTitle = (TextView) v.findViewById(R.id.title);
+            title = (TextView) v.findViewById(R.id.title);
+            thumbnail = (NetworkImageView) v.findViewById(R.id.thumbnail);
         }
     }
 }

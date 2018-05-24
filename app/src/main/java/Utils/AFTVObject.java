@@ -1,4 +1,4 @@
-package DataObjects;
+package Utils;
 
 public class AFTVObject {
     private String videoId;

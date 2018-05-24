@@ -3,14 +3,12 @@ package com.example.atul.arsenal;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.ContactAdapter;
-import DataObjects.AFTVObject;
+import Utils.AFTVObject;
 import JSONParser.parseAFTV;
 import Utils.ContactInfo;
 import Utils.HTTPStuff;
@@ -30,8 +28,8 @@ import YouTubeAPI.URLS;
 
 public class TabFragment extends Fragment {
     private static ArrayList<AFTVObject> list;
+    private static ArrayList<String> titles;
     int position;
-    List<ContactInfo> list1;
     ContactAdapter mAdapter;
     RecyclerView recyclerView;
     KEYS key;
@@ -64,21 +62,20 @@ public class TabFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.cardList);
         recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        list1 = new ArrayList<>();
         list = new ArrayList<>();
+        titles = new ArrayList<>();
         key = new KEYS();
         channel = new Channels();
         httpStuff = new HTTPStuff();
         nextPageToken = new String();
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ContactAdapter(list1);
+        mAdapter = new ContactAdapter(list);
         recyclerView.setAdapter(mAdapter);
-        createData();
 
         String URL = URLS.getPageURL(key.getKEY(), channel.getChannelId(), "");
         Log.v( "JSON: ", URL);
@@ -95,9 +92,9 @@ public class TabFragment extends Fragment {
                     Log.v( "JSON: ", data);
                     nextPageToken = object.getString("nextPageToken");
                     JSONArray results = object.getJSONArray("items");
-                    parseAFTV.setData(results, list);
+                    parseAFTV.setData(results, list, titles);
 
-                    //customAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
                     if (object.getString("nextPageToken") != null) {
                         String url = URLS.getPageURL(key.getKEY(), channel.getChannelId(), nextPageToken);
                         makeRequest(url);
@@ -109,29 +106,4 @@ public class TabFragment extends Fragment {
         });
     }
 
-    public void createData() {
-        ContactInfo info = new ContactInfo("Atul", "Kumar", "atul.kumar@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-
-        info = new ContactInfo("Zeeshan", "Kareem", "zeeshan.kareem@iitrpr.ac.in");
-        list1.add(info);
-    }
 }

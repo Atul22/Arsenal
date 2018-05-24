@@ -8,10 +8,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import DataObjects.AFTVObject;
+import Utils.AFTVObject;
 
 public class parseAFTV {
-    public static void setData(JSONArray results, ArrayList<AFTVObject> list) {
+    public static void setData(JSONArray results, ArrayList<AFTVObject> list, ArrayList<String> titles) {
         for(int i = 0; i < results.length(); i++) {
             try {
                 JSONObject object = results.getJSONObject(i);
@@ -27,8 +27,10 @@ public class parseAFTV {
                 JSONObject thumbnails = snippet.getJSONObject( "thumbnails" );
                 aftvObject.setPosterURL( thumbnails.getJSONObject( "default" ).getString( "url" ));
                 aftvObject.setHighPosterURL( thumbnails.getJSONObject( "high" ).getString( "url" ) );
-
-                list.add(aftvObject);
+                if(!titles.contains(aftvObject.getTitle())) {
+                    list.add(aftvObject);
+                    titles.add(aftvObject.getTitle());
+                }
             } catch( JSONException e ){
                 Log.v("Error: ", "Error");
                 e.printStackTrace();
