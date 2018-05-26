@@ -15,20 +15,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Adapter.ContactAdapter;
 import Utils.AFTVObject;
 import JSONParser.parseAFTV;
-import Utils.ContactInfo;
 import Utils.HTTPStuff;
-import YouTubeAPI.Channels;
-import YouTubeAPI.KEYS;
-import YouTubeAPI.URLS;
+import API.Channels;
+import API.KEYS;
+import API.URLS;
 
 public class TabFragment extends Fragment {
     private static ArrayList<AFTVObject> list;
-    private static ArrayList<String> titles;
     int position;
     ContactAdapter mAdapter;
     RecyclerView recyclerView;
@@ -63,7 +60,6 @@ public class TabFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.cardList);
         recyclerView.setHasFixedSize(true);
         list = new ArrayList<>();
-        titles = new ArrayList<>();
         key = new KEYS();
         channel = new Channels();
         httpStuff = new HTTPStuff();
@@ -78,7 +74,7 @@ public class TabFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         String URL = URLS.getPageURL(key.getKEY(), channel.getChannelId(), "");
-        Log.v( "JSON: ", URL);
+        Log.v( "JSON2: ", URL);
         makeRequest(URL);
 
     }
@@ -89,10 +85,9 @@ public class TabFragment extends Fragment {
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
-                    Log.v( "JSON: ", data);
                     nextPageToken = object.getString("nextPageToken");
                     JSONArray results = object.getJSONArray("items");
-                    parseAFTV.setData(results, list, titles);
+                    parseAFTV.setData(results, list);
 
                     mAdapter.notifyDataSetChanged();
                     if (object.getString("nextPageToken") != null) {

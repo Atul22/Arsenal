@@ -12,7 +12,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return TabFragment.getInstance(position);
+        if(position == 0) {
+            return TabFragment.getInstance(position);
+        }
+        else {
+            return TabFragment2.getInstance(position);
+        }
     }
 
     @Override

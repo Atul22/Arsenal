@@ -1,4 +1,4 @@
-package YouTubeAPI;
+package API;
 
 public class Channels {
     private String channelName = "ArsenalFanTV";

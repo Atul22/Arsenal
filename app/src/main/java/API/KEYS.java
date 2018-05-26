@@ -1,4 +1,4 @@
-package YouTubeAPI;
+package API;
 
 public class KEYS {
     private String KEY = "AIzaSyCk8DGXHLgGSQ-zFWL8a85JQSyyz3yVkJg";
