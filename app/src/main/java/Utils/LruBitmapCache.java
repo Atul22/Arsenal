@@ -1,4 +1,4 @@
-package com.example.atul.arsenal;
+package Utils;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;

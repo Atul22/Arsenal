@@ -1,5 +1,6 @@
-package com.example.atul.arsenal;
+package Fragments;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.atul.arsenal.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,15 +52,15 @@ public class TabFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tab, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.cardList);
+        recyclerView =  view.findViewById(R.id.cardList);
         recyclerView.setHasFixedSize(true);
         list = new ArrayList<>();
         key = new KEYS();

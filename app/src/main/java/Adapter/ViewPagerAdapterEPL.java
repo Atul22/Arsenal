@@ -1,23 +1,21 @@
-package com.example.atul.arsenal;
+package Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private String[] title = {"one", "two", "three"};
-    public ViewPagerAdapter(FragmentManager manager) {
+import Fragments.EPLFragments.TableFragment;
+
+public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
+    public String[] title = {"Table", "Fixtures", "Teams"};
+
+    public ViewPagerAdapterEPL(FragmentManager manager) {
         super(manager);
     }
 
     @Override
     public Fragment getItem(int position) {
-        if(position == 0) {
-            return TabFragment.getInstance(position);
-        }
-        else {
-            return TabFragment2.getInstance(position);
-        }
+        return TableFragment.getInstance(position);
     }
 
     @Override

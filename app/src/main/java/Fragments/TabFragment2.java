@@ -1,5 +1,6 @@
-package com.example.atul.arsenal;
+package Fragments;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.atul.arsenal.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,21 +33,22 @@ public class TabFragment2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        assert getArguments() != null;
         position = getArguments().getInt("pos");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tab2, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textView = (TextView) view.findViewById(R.id.tab2_text);
+        textView = view.findViewById(R.id.tab2_text);
         httpStuff = new HTTPStuff();
-        String URL = URLS.getCompetetionsURL();
+        String URL = URLS.getEplURL();
         Log.d("JSON3", URL);
         makeRequest(URL);
     }

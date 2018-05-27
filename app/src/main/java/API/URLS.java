@@ -8,7 +8,7 @@ public class URLS {
                 "&channelId=" + channelId + "&part=snippet,id&order=date&maxResults=20";
     }
 
-    public static String getCompetetionsURL() {
+    public static String getEplURL() {
         return "http://api.football-data.org/v1/competitions/445";
     }
 }

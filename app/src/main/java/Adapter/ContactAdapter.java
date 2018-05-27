@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,16 +10,12 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.atul.arsenal.AppController;
+import Utils.AppController;
 import com.example.atul.arsenal.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import Utils.AFTVObject;
-import Utils.ContactInfo;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,16 +32,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.AFTVView
     }
 
     @Override
-    public void onBindViewHolder(AFTVViewHolder aftvViewHolder, int i) {
+    public void onBindViewHolder(@NonNull AFTVViewHolder aftvViewHolder, int i) {
         AFTVObject object = videoList.get(i);
-        Log.v( "JSON1: ", object.getTitle());
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         aftvViewHolder.title.setText(object.getTitle());
         aftvViewHolder.thumbnail.setImageUrl(object.getHighPosterURL(), imageLoader);
     }
 
+    @NonNull
     @Override
-    public AFTVViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AFTVViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.card_layout, parent, false);
         return new AFTVViewHolder(itemView);
@@ -56,8 +53,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.AFTVView
 
         public AFTVViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.title);
-            thumbnail = (NetworkImageView) v.findViewById(R.id.thumbnail);
+            title = v.findViewById(R.id.title);
+            thumbnail = v.findViewById(R.id.thumbnail);
         }
     }
 }
