@@ -22,11 +22,13 @@ import Adapter.EPLTableAdapter;
 import JSONParser.parseLeagueTable;
 import Utils.EPLTableObject;
 import Utils.HTTPStuff;
+import Utils.VolleyRequest;
 
 public class TableFragment extends Fragment {
     ArrayList<EPLTableObject> mList;
     int position;
     HTTPStuff httpStuff;
+    VolleyRequest volleyRequest;
     EPLTableAdapter mAdapter;
     RecyclerView recyclerView;
     String leagueTableUrl;
@@ -56,6 +58,7 @@ public class TableFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         httpStuff = new HTTPStuff();
+        volleyRequest = new VolleyRequest();
         String URL = URLS.getEplURL();
         recyclerView = view.findViewById(R.id.epl_card_list);
         mList = new ArrayList<>();
@@ -65,20 +68,19 @@ public class TableFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new EPLTableAdapter(mList);
+        mAdapter = new EPLTableAdapter(mList, getContext());
         recyclerView.setAdapter(mAdapter);
 
         getLeagueTableUrl(URL);
     }
 
     public void getLeagueTableUrl(final String URL) {
-        httpStuff.getData(URL, new HTTPStuff.VolleyCallBack() {
+        volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
                     JSONObject links = object.getJSONObject("_links");
-                    Log.d("JSON4", links.getJSONObject("leagueTable").getString("href"));
                     leagueTableUrl = links.getJSONObject("leagueTable").getString("href");
                     makeRequest(leagueTableUrl);
                 } catch (JSONException e) {
@@ -90,16 +92,14 @@ public class TableFragment extends Fragment {
 
     public void makeRequest(final String URL) {
         Log.v("JSON4", "url = " + URL);
-        httpStuff.getData(URL, new HTTPStuff.VolleyCallBack() {
+        volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
                     JSONArray results = object.getJSONArray("standing");
-                    //Log.v("JSON4", results.getJSONObject(0).getString("crestURI"));
                     parseLeagueTable.setData(results, mList);
                     mAdapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

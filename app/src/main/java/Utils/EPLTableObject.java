@@ -18,7 +18,7 @@ public class EPLTableObject {
         return position;
     }
 
-    public void setLogo(String log) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 

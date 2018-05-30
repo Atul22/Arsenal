@@ -1,27 +1,35 @@
 package Fragments;
 
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.StreamEncoder;
+import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
+import com.caverock.androidsvg.SVG;
 import com.example.atul.arsenal.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.InputStream;
 
-import API.URLS;
-import Utils.HTTPStuff;
+import SvgUtils.SvgDecoder;
+import SvgUtils.SvgDrawableTranscoder;
+import SvgUtils.SvgSoftwareLayerSetter;
 
 public class TabFragment2 extends Fragment {
     int position;
     TextView textView;
-    HTTPStuff httpStuff;
+    ImageView imageView;
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
@@ -47,26 +55,28 @@ public class TabFragment2 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         textView = view.findViewById(R.id.tab2_text);
-        httpStuff = new HTTPStuff();
-        String URL = URLS.getEplURL();
-        Log.d("JSON3", URL);
-        makeRequest(URL);
+        imageView = view.findViewById(R.id.glide_logo);
+
+        GenericRequestBuilder<Uri,InputStream,SVG,PictureDrawable>
+                requestBuilder = Glide.with(getContext())
+                .using(Glide.buildStreamModelLoader(Uri.class, getContext()), InputStream.class)
+                .from(Uri.class)
+                .as(SVG.class)
+                .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
+                .sourceEncoder(new StreamEncoder())
+                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
+                .decoder(new SvgDecoder())
+                .placeholder(R.drawable.svg_image_loading)
+                .error(R.drawable.svg_image_error)
+                .listener(new SvgSoftwareLayerSetter<Uri>());
+
+        Uri uri = Uri.parse("https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg");
+        requestBuilder
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .load(uri)
+                .into(imageView);
+
+        //Glide.with(view.getContext()).load("https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg").into(imageView);
     }
 
-    public void makeRequest(final String URL) {
-        httpStuff.getData(URL, new HTTPStuff.VolleyCallBack() {
-            @Override
-            public void onSuccess(String data) {
-                try {
-                    JSONObject object = new JSONObject(data);
-                    Log.d("JSON3", object.getString("caption"));
-                    JSONObject links = object.getJSONObject("_links");
-                    Log.d("JSON3", links.getJSONObject("teams").getString("href"));
-                    Log.d("JSON3", data);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }

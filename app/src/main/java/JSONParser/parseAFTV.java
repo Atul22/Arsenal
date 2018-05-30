@@ -20,13 +20,13 @@ public class parseAFTV {
                 JSONObject id = object.getJSONObject("id");
                 aftvObject.setVideoId(id.getString("videoId"));
 
-                JSONObject snippet = object.getJSONObject( "snippet" );
+                JSONObject snippet = object.getJSONObject("snippet");
                 aftvObject.setTitle(snippet.getString("title"));
                 aftvObject.setPublishedAt(snippet.getString("publishedAt"));
 
-                JSONObject thumbnails = snippet.getJSONObject( "thumbnails" );
-                aftvObject.setPosterURL( thumbnails.getJSONObject( "default" ).getString( "url" ));
-                aftvObject.setHighPosterURL( thumbnails.getJSONObject( "high" ).getString( "url" ) );
+                JSONObject thumbnails = snippet.getJSONObject("thumbnails");
+                aftvObject.setPosterURL( thumbnails.getJSONObject( "default" ).getString("url"));
+                aftvObject.setHighPosterURL( thumbnails.getJSONObject("high").getString("url"));
                 list.add(aftvObject);
             } catch( JSONException e ){
                 Log.v("Error: ", "Error");
