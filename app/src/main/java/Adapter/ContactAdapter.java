@@ -15,7 +15,7 @@ import com.example.atul.arsenal.R;
 
 import java.util.ArrayList;
 
-import Utils.AFTVObject;
+import DataObjects.AFTVObject;
 
 import static android.content.ContentValues.TAG;
 

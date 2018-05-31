@@ -1,14 +1,12 @@
 package JSONParser;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import Utils.EPLTableObject;
+import DataObjects.EPLTableObject;
 
 public class parseLeagueTable {
     public static void setData(JSONArray results, ArrayList<EPLTableObject> list) {

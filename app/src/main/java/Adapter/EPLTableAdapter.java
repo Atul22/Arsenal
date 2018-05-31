@@ -30,7 +30,7 @@ import SvgUtils.SvgDecoder;
 import SvgUtils.SvgDrawableTranscoder;
 import SvgUtils.SvgSoftwareLayerSetter;
 import Utils.AppController;
-import Utils.EPLTableObject;
+import DataObjects.EPLTableObject;
 
 import static android.content.ContentValues.TAG;
 

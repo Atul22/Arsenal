@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import Utils.AFTVObject;
+import DataObjects.AFTVObject;
 
 public class parseAFTV {
     public static void setData(JSONArray results, ArrayList<AFTVObject> list) {

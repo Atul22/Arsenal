@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/epl_card_list"
+        android:id="@+id/epl_fixtures_fragment_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="110dp"
-    />
+        />
 
 </android.support.constraint.ConstraintLayout>

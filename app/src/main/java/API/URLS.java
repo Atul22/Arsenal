@@ -11,4 +11,8 @@ public class URLS {
     public static String getEplURL() {
         return "http://api.football-data.org/v1/competitions/445";
     }
+
+    public static String getEplFixturesURL() {
+        return "http://api.football-data.org/v1/competitions/445/fixtures";
+    }
 }

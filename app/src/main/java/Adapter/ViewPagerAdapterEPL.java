@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import Fragments.EPLFragments.FixturesFragment;
 import Fragments.EPLFragments.TableFragment;
 
 public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
@@ -15,7 +16,12 @@ public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return TableFragment.getInstance(position);
+        if(position == 0) {
+            return TableFragment.getInstance(position);
+        }
+        else {
+            return FixturesFragment.getInstance(position);
+        }
     }
 
     @Override
