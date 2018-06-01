@@ -38,7 +38,6 @@ public class EPLTableAdapter extends RecyclerView.Adapter<EPLTableAdapter.EPLTab
     private ArrayList<EPLTableObject> tableList;
     private Context mContext;
     public EPLTableAdapter( ArrayList<EPLTableObject> list, Context context) {
-        Log.d(TAG, "ContactAdapter: " + list);
         tableList = list;
         mContext = context;
     }
@@ -104,7 +103,7 @@ public class EPLTableAdapter extends RecyclerView.Adapter<EPLTableAdapter.EPLTab
     }
 
     private static void loadImage(Context context, String url, ImageView imageView) {
-        Log.v("loadImage", url);
+        //Log.v("loadImage", url);
         GenericRequestBuilder<Uri,InputStream,SVG,PictureDrawable>
                 requestBuilder = Glide.with(context)
                 .using(Glide.buildStreamModelLoader(Uri.class, context), InputStream.class)

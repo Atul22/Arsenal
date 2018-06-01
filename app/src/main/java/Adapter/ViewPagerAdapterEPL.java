@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import Fragments.EPLFragments.FixturesFragment;
 import Fragments.EPLFragments.TableFragment;
+import Fragments.EPLFragments.TeamsFragment;
 
 public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
     public String[] title = {"Table", "Fixtures", "Teams"};
@@ -19,8 +20,11 @@ public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
         if(position == 0) {
             return TableFragment.getInstance(position);
         }
-        else {
+        else if(position == 1) {
             return FixturesFragment.getInstance(position);
+        }
+        else {
+            return TeamsFragment.getInstance(position);
         }
     }
 

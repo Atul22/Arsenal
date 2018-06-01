@@ -13,6 +13,7 @@ import DataObjects.EPLFixturesObject;
 
 public class parseLeagueFixtures {
     public static void setData(JSONArray response, HashMap<String, ArrayList<EPLFixturesObject>> map, ArrayList<String> list1) {
+        Log.v("responseLen", Integer.toString(response.length()));
         for(int i = 0; i < response.length(); i++) {
             try {
                 JSONObject object = response.getJSONObject(i);
@@ -28,11 +29,6 @@ public class parseLeagueFixtures {
                 JSONObject result = object.getJSONObject("result");
                 fixturesObject.setHomeTeamGoals(result.getString("goalsHomeTeam"));
                 fixturesObject.setAwayTeamGoals(result.getString("goalsAwayTeam"));
-
-                JSONObject resultsHT = result.getJSONObject("halfTime");
-                fixturesObject.setHomeTeamGoalsHT(resultsHT.getString("goalsHomeTeam"));
-                fixturesObject.setAwayTeamGoalsHT(resultsHT.getString("goalsAwayTeam"));
-
                 if(map.containsKey(matchDay)) {
                     ArrayList<EPLFixturesObject> list = map.get(matchDay);
                     list.add(fixturesObject);
