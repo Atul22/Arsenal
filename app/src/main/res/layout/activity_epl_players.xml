@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EPLTeamsActivity">
-    <TextView
-        android:id="@+id/sample1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textColor="@android:color/black"/>
+    tools:context=".EPLPlayersActivity">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/epl_players_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

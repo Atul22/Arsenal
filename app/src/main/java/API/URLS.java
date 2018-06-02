@@ -19,4 +19,8 @@ public class URLS {
     public static String getEplTeamsURL() {
         return "http://api.football-data.org/v1/competitions/445/teams";
     }
+
+    public static String getNewsfeedUrl(String key, String date) {
+        return "https://newsapi.org/v2/everything?sources=bbc-sport&q=football&from=" + date + "&sortBy=publishedAt&apiKey=" + key;
+    }
 }

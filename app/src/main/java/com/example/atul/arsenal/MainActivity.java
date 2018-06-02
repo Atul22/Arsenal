@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import Adapter.ViewPagerAdapter;
+import Adapter.ViewPagerAdapterMain;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapterMain adapter = new ViewPagerAdapterMain(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);

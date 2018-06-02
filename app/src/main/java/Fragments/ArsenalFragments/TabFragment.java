@@ -1,4 +1,4 @@
-package Fragments;
+package Fragments.ArsenalFragments;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,9 +40,9 @@ public class TabFragment extends Fragment {
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
-        TabFragment tabFragment = new TabFragment();
-        tabFragment.setArguments(bundle);
-        return tabFragment;
+        TabFragment mainFragment1 = new TabFragment();
+        mainFragment1.setArguments(bundle);
+        return mainFragment1;
     }
 
     @Override
@@ -79,7 +79,6 @@ public class TabFragment extends Fragment {
         String URL = URLS.getPageURL(key.getKEY(), channel.getChannelId(), "");
         Log.v( "JSON2: ", URL);
         makeRequest(URL);
-
     }
 
     public void makeRequest(final String URL) {

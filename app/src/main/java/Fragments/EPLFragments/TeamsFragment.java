@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.atul.arsenal.EPLTeamsActivity;
+import com.example.atul.arsenal.EPLPlayersActivity;
 import com.example.atul.arsenal.R;
 
 import org.json.JSONArray;
@@ -74,8 +74,10 @@ public class TeamsFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 EPLTeamsObject object = mList.get(position);
-                Intent intent = new Intent(getActivity(), EPLTeamsActivity.class);
+                Intent intent = new Intent(getActivity(), EPLPlayersActivity.class);
                 intent.putExtra("teamPlayers", object.getTeamPlayers());
+                intent.putExtra("teamLogo", object.getTeamLogo());
+                intent.putExtra("teamName", object.getName());
                 startActivity(intent);
             }
         }));

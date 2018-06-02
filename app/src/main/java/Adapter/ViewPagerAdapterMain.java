@@ -4,19 +4,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import Fragments.ArsenalFragments.TabFragment;
+import Fragments.MainFragments.MainFragment1;
 import Fragments.TabFragment2;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private String[] title = {"one", "two", "three"};
-    public ViewPagerAdapter(FragmentManager manager) {
+public class ViewPagerAdapterMain extends FragmentPagerAdapter{
+    private String[] title = {"NewsFeed", "two", "three"};
+    public ViewPagerAdapterMain(FragmentManager manager) {
         super(manager);
     }
 
     @Override
     public Fragment getItem(int position) {
         if(position == 0) {
-            return TabFragment.getInstance(position);
+            return MainFragment1.getInstance(position);
         }
         else {
             return TabFragment2.getInstance(position);

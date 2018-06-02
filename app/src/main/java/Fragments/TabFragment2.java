@@ -3,6 +3,7 @@ package Fragments;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,6 +57,11 @@ public class TabFragment2 extends Fragment {
 
         textView = view.findViewById(R.id.tab2_text);
         imageView = view.findViewById(R.id.glide_logo);
+
+        /*String url = "https://paul.kinlan.me/";
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(getContext(), Uri.parse(url));*/
 
         GenericRequestBuilder<Uri,InputStream,SVG,PictureDrawable>
                 requestBuilder = Glide.with(getContext())
