@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.atul.arsenal.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,19 +18,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import API.URLS;
-import Adapter.EPLFixtureFragmentAdapter;
-import DataObjects.EPLFixturesObject;
-import DataObjects.TestObject;
+import Adapter.LeagueFixtureFragmentAdapter;
+import DataObjects.FixturesObject;
 import JSONParser.parseLeagueFixtures;
-import JSONParser.parseLeagueTable;
 import Utils.VolleyRequest;
 
 public class FixturesFragment extends Fragment {
     int position;
     RecyclerView recyclerView;
-    HashMap<String, ArrayList<EPLFixturesObject>> map;
+    HashMap<String, ArrayList<FixturesObject>> map;
     private ArrayList<String> list;
-    EPLFixtureFragmentAdapter mAdapter;
+    LeagueFixtureFragmentAdapter mAdapter;
     VolleyRequest volleyRequest;
 
     public static Fragment getInstance(int position) {
@@ -51,7 +48,7 @@ public class FixturesFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.epl_fixtures_fragment, container, false);
+        return inflater.inflate(R.layout.league_fixtures_fragment, container, false);
     }
 
     @Override
@@ -64,8 +61,7 @@ public class FixturesFragment extends Fragment {
         map = new HashMap<>();
         list = new ArrayList<>();
         volleyRequest = new VolleyRequest();
-        String URL = URLS.getEplFixturesURL();
-        mAdapter = new EPLFixtureFragmentAdapter(map, list, getContext());
+        mAdapter = new LeagueFixtureFragmentAdapter(map, list, getContext());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
@@ -73,6 +69,8 @@ public class FixturesFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(mAdapter);
+
+        String URL = URLS.getLeagueFixturesURL("445");
         makeRequest(URL);
     }
 

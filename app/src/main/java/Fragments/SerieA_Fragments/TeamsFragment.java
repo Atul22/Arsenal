@@ -1,4 +1,4 @@
-package Fragments.EPLFragments;
+package Fragments.SerieA_Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,7 +81,7 @@ public class TeamsFragment extends Fragment {
             }
         }));
 
-        String URL = URLS.getLeagueTeamsURL("445");
+        String URL = URLS.getLeagueTeamsURL("456");
         makeRequest(URL);
 
     }

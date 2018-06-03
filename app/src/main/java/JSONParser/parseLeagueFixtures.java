@@ -9,15 +9,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import DataObjects.EPLFixturesObject;
+import DataObjects.FixturesObject;
 
 public class parseLeagueFixtures {
-    public static void setData(JSONArray response, HashMap<String, ArrayList<EPLFixturesObject>> map, ArrayList<String> list1) {
+    public static void setData(JSONArray response, HashMap<String, ArrayList<FixturesObject>> map, ArrayList<String> list1) {
         Log.v("responseLen", Integer.toString(response.length()));
         for(int i = 0; i < response.length(); i++) {
             try {
                 JSONObject object = response.getJSONObject(i);
-                EPLFixturesObject fixturesObject = new EPLFixturesObject();
+                FixturesObject fixturesObject = new FixturesObject();
 
                 fixturesObject.sethomeTeamName(object.getString("homeTeamName"));
                 fixturesObject.setawayTeamName(object.getString("awayTeamName"));
@@ -30,10 +30,10 @@ public class parseLeagueFixtures {
                 fixturesObject.setHomeTeamGoals(result.getString("goalsHomeTeam"));
                 fixturesObject.setAwayTeamGoals(result.getString("goalsAwayTeam"));
                 if(map.containsKey(matchDay)) {
-                    ArrayList<EPLFixturesObject> list = map.get(matchDay);
+                    ArrayList<FixturesObject> list = map.get(matchDay);
                     list.add(fixturesObject);
                 }else {
-                    ArrayList<EPLFixturesObject> list = new ArrayList<>();
+                    ArrayList<FixturesObject> list = new ArrayList<>();
                     list.add(fixturesObject);
                     map.put(matchDay, list);
                     list1.add(matchDay);

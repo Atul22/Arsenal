@@ -2,9 +2,7 @@ package Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +12,12 @@ import com.example.atul.arsenal.R;
 
 import java.util.ArrayList;
 
-import DataObjects.EPLFixturesObject;
-import DataObjects.TestObject;
+import DataObjects.FixturesObject;
 
-public class EPLFixtureListAdapter extends RecyclerView.Adapter<EPLFixtureListAdapter.EPLFixtureListRowHolder>{
-    private ArrayList<EPLFixturesObject> mList;
+public class LeagueFixtureListAdapter extends RecyclerView.Adapter<LeagueFixtureListAdapter.EPLFixtureListRowHolder>{
+    private ArrayList<FixturesObject> mList;
     private Context mContext;
-    public EPLFixtureListAdapter(ArrayList<EPLFixturesObject> list, Context context) {
+    public LeagueFixtureListAdapter(ArrayList<FixturesObject> list, Context context) {
         mList = list;
         mContext = context;
     }
@@ -31,8 +28,8 @@ public class EPLFixtureListAdapter extends RecyclerView.Adapter<EPLFixtureListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EPLFixtureListAdapter.EPLFixtureListRowHolder viewHolder, int i) {
-        EPLFixturesObject object = mList.get(i);
+    public void onBindViewHolder(@NonNull LeagueFixtureListAdapter.EPLFixtureListRowHolder viewHolder, int i) {
+        FixturesObject object = mList.get(i);
 
         viewHolder.homeTeamName.setText(object.gethomeTeamName());
         viewHolder.awayTeamName.setText(object.getawayTeamName());
@@ -44,10 +41,10 @@ public class EPLFixtureListAdapter extends RecyclerView.Adapter<EPLFixtureListAd
 
     @NonNull
     @Override
-    public EPLFixtureListAdapter.EPLFixtureListRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LeagueFixtureListAdapter.EPLFixtureListRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.epl_fixtures_row, parent, false);
-        return new EPLFixtureListAdapter.EPLFixtureListRowHolder(itemView);
+                inflate(R.layout.league_fixtures_row, parent, false);
+        return new LeagueFixtureListAdapter.EPLFixtureListRowHolder(itemView);
     }
 
     public static class EPLFixtureListRowHolder extends RecyclerView.ViewHolder {

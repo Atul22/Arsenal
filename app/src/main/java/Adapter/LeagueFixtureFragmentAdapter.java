@@ -14,15 +14,13 @@ import com.example.atul.arsenal.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import DataObjects.EPLFixturesObject;
-import DataObjects.EPLTableObject;
-import DataObjects.TestObject;
+import DataObjects.FixturesObject;
 
-public class EPLFixtureFragmentAdapter extends RecyclerView.Adapter<EPLFixtureFragmentAdapter.EPLFixtureFragmentRowHolder>{
+public class LeagueFixtureFragmentAdapter extends RecyclerView.Adapter<LeagueFixtureFragmentAdapter.EPLFixtureFragmentRowHolder>{
     private ArrayList<String> parentList;
-    private HashMap<String, ArrayList<EPLFixturesObject>> map;
+    private HashMap<String, ArrayList<FixturesObject>> map;
     private Context mContext;
-    public EPLFixtureFragmentAdapter(HashMap<String, ArrayList<EPLFixturesObject>> list, ArrayList<String> list1, Context context) {
+    public LeagueFixtureFragmentAdapter(HashMap<String, ArrayList<FixturesObject>> list, ArrayList<String> list1, Context context) {
         mContext = context;
         parentList = list1;
         map = list;
@@ -34,7 +32,7 @@ public class EPLFixtureFragmentAdapter extends RecyclerView.Adapter<EPLFixtureFr
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EPLFixtureFragmentAdapter.EPLFixtureFragmentRowHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull LeagueFixtureFragmentAdapter.EPLFixtureFragmentRowHolder viewHolder, int i) {
         String matchDay = parentList.get(i);
         viewHolder.textView.setText(matchDay);
 
@@ -44,7 +42,7 @@ public class EPLFixtureFragmentAdapter extends RecyclerView.Adapter<EPLFixtureFr
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         viewHolder.recyclerView.setLayoutManager(layoutManager);
-        EPLFixtureListAdapter mAdapter = new EPLFixtureListAdapter(map.get(matchDay), mContext);
+        LeagueFixtureListAdapter mAdapter = new LeagueFixtureListAdapter(map.get(matchDay), mContext);
         viewHolder.recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }
@@ -53,7 +51,7 @@ public class EPLFixtureFragmentAdapter extends RecyclerView.Adapter<EPLFixtureFr
     @Override
     public EPLFixtureFragmentRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.epl_fixtures_card_layout, parent, false);
+                inflate(R.layout.league_fixtures_card_layout, parent, false);
         return new EPLFixtureFragmentRowHolder(itemView);
     }
 

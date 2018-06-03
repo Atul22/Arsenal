@@ -1,6 +1,6 @@
 package DataObjects;
 
-public class EPLPlayersObject {
+public class PlayersObject {
     private String playerPosition;
     private String playerJersey;
     private String playerName;

@@ -1,4 +1,4 @@
-package Fragments.EPLFragments;
+package Fragments.LaLigaFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ import JSONParser.parseLeagueTeams;
 import Utils.RecyclerItemClickListener;
 import Utils.VolleyRequest;
 
-public class TeamsFragment extends Fragment {
+public class TeamsFragment extends Fragment{
     ArrayList<TeamsObject> mList;
     int position;
     RecyclerView recyclerView;
@@ -81,7 +81,7 @@ public class TeamsFragment extends Fragment {
             }
         }));
 
-        String URL = URLS.getLeagueTeamsURL("445");
+        String URL = URLS.getLeagueTeamsURL("455");
         makeRequest(URL);
 
     }

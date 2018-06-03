@@ -1,6 +1,6 @@
 package DataObjects;
 
-public class EPLTeamsObject {
+public class TeamsObject {
     private String name;
     private String shortName;
     private String teamCode;

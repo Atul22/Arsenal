@@ -24,18 +24,18 @@ import com.example.atul.arsenal.R;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import DataObjects.EPLTeamsObject;
+import DataObjects.TeamsObject;
 import SvgUtils.SvgDecoder;
 import SvgUtils.SvgDrawableTranscoder;
 import SvgUtils.SvgSoftwareLayerSetter;
 import Utils.AppController;
 
-public class EPLTeamsAdapter extends RecyclerView.Adapter<EPLTeamsAdapter.EPLTeamsRowHolder> implements View.OnClickListener {
+public class LeagueTeamsAdapter extends RecyclerView.Adapter<LeagueTeamsAdapter.EPLTeamsRowHolder> implements View.OnClickListener {
 
-    private ArrayList<EPLTeamsObject> mList;
+    private ArrayList<TeamsObject> mList;
     private Context mContext;
 
-    public EPLTeamsAdapter(ArrayList<EPLTeamsObject> list, Context context) {
+    public LeagueTeamsAdapter(ArrayList<TeamsObject> list, Context context) {
         mList = list;
         mContext = context;
     }
@@ -47,7 +47,7 @@ public class EPLTeamsAdapter extends RecyclerView.Adapter<EPLTeamsAdapter.EPLTea
 
     @Override
     public void onBindViewHolder(@NonNull EPLTeamsRowHolder viewHolder, int i) {
-        EPLTeamsObject object = mList.get(i);
+        TeamsObject object = mList.get(i);
         String serialNum = Integer.toString(i + 1);
         viewHolder.serialNum.setText(serialNum);
         viewHolder.teamName.setText(object.getName());
@@ -65,7 +65,7 @@ public class EPLTeamsAdapter extends RecyclerView.Adapter<EPLTeamsAdapter.EPLTea
     @Override
     public EPLTeamsRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.epl_team_row, parent, false);
+                inflate(R.layout.league_team_row, parent, false);
         return new EPLTeamsRowHolder(itemView);
     }
 

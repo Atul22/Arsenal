@@ -4,12 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import Fragments.EPLFragments.*;
-
-public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
+import Fragments.Ligue1Fragments.*;
+public class ViewPagerAdapterLigue1 extends FragmentPagerAdapter {
     public String[] title = {"Table", "Fixtures", "Teams"};
 
-    public ViewPagerAdapterEPL(FragmentManager manager) {
+    public ViewPagerAdapterLigue1(FragmentManager manager) {
         super(manager);
     }
 

@@ -1,6 +1,6 @@
 package DataObjects;
 
-public class EPLTableObject {
+public class TableObject {
     private String position;
     private String logo;
     private String teamName;

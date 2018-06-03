@@ -1,4 +1,4 @@
-package Fragments.EPLFragments;
+package Fragments.BundesLigaFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +32,6 @@ public class TeamsFragment extends Fragment {
     RecyclerView recyclerView;
     LeagueTeamsAdapter mAdapter;
     VolleyRequest volleyRequest;
-
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
@@ -81,7 +80,7 @@ public class TeamsFragment extends Fragment {
             }
         }));
 
-        String URL = URLS.getLeagueTeamsURL("445");
+        String URL = URLS.getLeagueTeamsURL("452");
         makeRequest(URL);
 
     }

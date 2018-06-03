@@ -6,13 +6,25 @@
             android:icon="@android:drawable/ic_menu_camera"
             android:title="@string/EPL" />
         <item
+            android:id="@+id/nav_laliga"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/laliga" />
+        <item
             android:id="@+id/nav_gallery"
             android:icon="@android:drawable/ic_menu_gallery"
-            android:title="@string/gallery" />
+            android:title="@string/bundesliga" />
+        <item
+            android:id="@+id/nav_seriea"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/seriea" />
+        <item
+            android:id="@+id/nav_ligue1"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/ligue1" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@android:drawable/ic_media_play"
-            android:title="@string/slideshow" />
+            android:title="@string/arsenal" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@android:drawable/ic_menu_manage"

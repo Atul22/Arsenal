@@ -5,7 +5,6 @@ import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,14 +29,12 @@ import SvgUtils.SvgDecoder;
 import SvgUtils.SvgDrawableTranscoder;
 import SvgUtils.SvgSoftwareLayerSetter;
 import Utils.AppController;
-import DataObjects.EPLTableObject;
+import DataObjects.TableObject;
 
-import static android.content.ContentValues.TAG;
-
-public class EPLTableAdapter extends RecyclerView.Adapter<EPLTableAdapter.EPLTableRowHolder>{
-    private ArrayList<EPLTableObject> tableList;
+public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.EPLTableRowHolder>{
+    private ArrayList<TableObject> tableList;
     private Context mContext;
-    public EPLTableAdapter( ArrayList<EPLTableObject> list, Context context) {
+    public LeagueTableAdapter(ArrayList<TableObject> list, Context context) {
         tableList = list;
         mContext = context;
     }
@@ -49,7 +46,7 @@ public class EPLTableAdapter extends RecyclerView.Adapter<EPLTableAdapter.EPLTab
 
     @Override
     public void onBindViewHolder(@NonNull EPLTableRowHolder viewHolder, int i) {
-        EPLTableObject object = tableList.get(i);
+        TableObject object = tableList.get(i);
         //ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         viewHolder.position.setText(object.getPosition());
         //viewHolder.teamLogo.setImageUrl(object.getLogo(), imageLoader);
@@ -73,7 +70,7 @@ public class EPLTableAdapter extends RecyclerView.Adapter<EPLTableAdapter.EPLTab
     @Override
     public EPLTableRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.epl_table_row, parent, false);
+                inflate(R.layout.league_table_row, parent, false);
         return new EPLTableRowHolder(itemView);
     }
 

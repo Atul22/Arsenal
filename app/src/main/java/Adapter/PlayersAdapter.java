@@ -12,14 +12,14 @@ import com.example.atul.arsenal.R;
 
 import java.util.ArrayList;
 
-import DataObjects.EPLPlayersObject;
+import DataObjects.PlayersObject;
 
 
-public class EPLPlayersAdapter extends RecyclerView.Adapter<EPLPlayersAdapter.EPLPlayersRowHolder>{
-    private ArrayList<EPLPlayersObject> mList;
+public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.EPLPlayersRowHolder>{
+    private ArrayList<PlayersObject> mList;
     private Context mContext;
 
-    public EPLPlayersAdapter(ArrayList<EPLPlayersObject> list, Context context) {
+    public PlayersAdapter(ArrayList<PlayersObject> list, Context context) {
         mList = list;
         mContext = context;
     }
@@ -31,7 +31,7 @@ public class EPLPlayersAdapter extends RecyclerView.Adapter<EPLPlayersAdapter.EP
 
     @Override
     public void onBindViewHolder(@NonNull EPLPlayersRowHolder viewHolder, int i) {
-        EPLPlayersObject object = mList.get(i);
+        PlayersObject object = mList.get(i);
         viewHolder.playerPosition.setText(object.getPlayerPosition());
         viewHolder.playerJersey.setText(object.getPlayerJersey());
         viewHolder.playerName.setText(object.getPlayerName());
@@ -45,7 +45,7 @@ public class EPLPlayersAdapter extends RecyclerView.Adapter<EPLPlayersAdapter.EP
     @Override
     public EPLPlayersRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.epl_players_row, parent, false);
+                inflate(R.layout.league_players_row, parent, false);
         return new EPLPlayersRowHolder(itemView);
     }
 

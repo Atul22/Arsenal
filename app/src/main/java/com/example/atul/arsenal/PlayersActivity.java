@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,27 +11,27 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import Adapter.EPLPlayersAdapter;
-import DataObjects.EPLPlayersObject;
+import Adapter.PlayersAdapter;
+import DataObjects.PlayersObject;
 import JSONParser.parseLeaguePlayers;
 import Utils.VolleyRequest;
 
-public class EPLPlayersActivity extends AppCompatActivity {
-    ArrayList<EPLPlayersObject> mList;
+public class PlayersActivity extends AppCompatActivity {
+    ArrayList<PlayersObject> mList;
     RecyclerView recyclerView;
-    EPLPlayersAdapter mAdapter;
+    PlayersAdapter mAdapter;
     VolleyRequest volleyRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_epl_players);
+        setContentView(R.layout.activity_league_players);
         String playersUrl = getIntent().getStringExtra("teamPlayers");
         String teamName = getIntent().getStringExtra("teamName");
         String teamLogo = getIntent().getStringExtra("teamLogo");
 
         recyclerView = findViewById(R.id.epl_players_list);
         mList = new ArrayList<>();
-        mAdapter = new EPLPlayersAdapter(mList, getApplicationContext());
+        mAdapter = new PlayersAdapter(mList, getApplicationContext());
         volleyRequest = new VolleyRequest();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

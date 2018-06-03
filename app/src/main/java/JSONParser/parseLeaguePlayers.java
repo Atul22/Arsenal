@@ -6,23 +6,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import DataObjects.EPLPlayersObject;
+import DataObjects.PlayersObject;
 
 public class parseLeaguePlayers {
-    public static void setData(JSONArray results, ArrayList<EPLPlayersObject> list) {
+    public static void setData(JSONArray results, ArrayList<PlayersObject> list) {
         for(int i = 0; i < results.length(); i++) {
             try {
                 JSONObject object = results.getJSONObject(i);
-                EPLPlayersObject eplPlayersObject = new EPLPlayersObject();
+                PlayersObject playersObject = new PlayersObject();
 
-                eplPlayersObject.setPlayerName(object.getString("name"));
-                eplPlayersObject.setPlayerPosition(object.getString("position"));
-                eplPlayersObject.setPlayerJersey(object.getString("jerseyNumber"));
-                eplPlayersObject.setPlayerDOB(object.getString("dateOfBirth"));
-                eplPlayersObject.setPlayerNationality(object.getString("nationality"));
-                eplPlayersObject.setPlayerContract(object.getString("contractUntil"));
+                playersObject.setPlayerName(object.getString("name"));
+                playersObject.setPlayerPosition(object.getString("position"));
+                playersObject.setPlayerJersey(object.getString("jerseyNumber"));
+                playersObject.setPlayerDOB(object.getString("dateOfBirth"));
+                playersObject.setPlayerNationality(object.getString("nationality"));
+                playersObject.setPlayerContract(object.getString("contractUntil"));
 
-                list.add(eplPlayersObject);
+                list.add(playersObject);
             } catch (JSONException e ) {
                 e.printStackTrace();
             }

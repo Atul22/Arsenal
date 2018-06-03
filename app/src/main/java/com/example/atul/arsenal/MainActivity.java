@@ -51,12 +51,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.v("JSON3", item.getTitle().toString());
                 item.setChecked(true);
                 mDrawerLayout.closeDrawers();
-                if (item.getTitle().toString().equals(getString(R.string.slideshow))) {
+                if (item.getTitle().toString().equals(getString(R.string.arsenal))) {
                         startActivity(new Intent(MainActivity.this, VideosActivity.class));
                 } else if (item.getTitle().toString().equals(getString(R.string.EPL))) {
                     startActivity(new Intent(MainActivity.this, EPLActivity.class));
                 } else if(item.getTitle().toString().equals(getString(R.string.debate))) {
                     startActivity(new Intent(MainActivity.this, DebateActivity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.bundesliga))) {
+                    startActivity(new Intent(MainActivity.this, BundesLigaActivity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.laliga))) {
+                    startActivity(new Intent(MainActivity.this, LaLigaActivity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.seriea))) {
+                    startActivity(new Intent(MainActivity.this, SerieA_Activity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.ligue1))) {
+                    startActivity(new Intent(MainActivity.this, Ligue1Activity.class));
                 }
                 return true;
             }

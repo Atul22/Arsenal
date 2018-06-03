@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Arsenal</string>
     <string name="EPL">Premier League</string>
-    <string name="gallery">Gallery</string>
-    <string name="slideshow">Videos</string>
+    <string name="laliga">LaLiga</string>
+    <string name="bundesliga">BundesLiga</string>
+    <string name="seriea">SerieA</string>
+    <string name="ligue1">Ligue1</string>
+    <string name="arsenal">Arsenal</string>
     <string name="debate">The Debate</string>
     <string name="header">My Header Title</string>
 </resources>

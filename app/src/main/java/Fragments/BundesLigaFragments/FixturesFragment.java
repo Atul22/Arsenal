@@ -1,6 +1,5 @@
-package Fragments.EPLFragments;
+package Fragments.BundesLigaFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,35 +9,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.atul.arsenal.PlayersActivity;
 import com.example.atul.arsenal.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import API.URLS;
-import Adapter.LeagueTeamsAdapter;
-import DataObjects.TeamsObject;
-import JSONParser.parseLeagueTeams;
-import Utils.RecyclerItemClickListener;
+import Adapter.LeagueFixtureFragmentAdapter;
+import DataObjects.FixturesObject;
+import JSONParser.parseLeagueFixtures;
 import Utils.VolleyRequest;
 
-public class TeamsFragment extends Fragment {
-    ArrayList<TeamsObject> mList;
+public class FixturesFragment extends Fragment {
     int position;
     RecyclerView recyclerView;
-    LeagueTeamsAdapter mAdapter;
+    HashMap<String, ArrayList<FixturesObject>> map;
+    private ArrayList<String> list;
+    LeagueFixtureFragmentAdapter mAdapter;
     VolleyRequest volleyRequest;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
-        TeamsFragment teamsFragment = new TeamsFragment();
-        teamsFragment.setArguments(bundle);
-        return teamsFragment;
+        FixturesFragment fixturesFragment = new FixturesFragment();
+        fixturesFragment.setArguments(bundle);
+        return fixturesFragment;
     }
 
     @Override
@@ -50,50 +48,39 @@ public class TeamsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.league_teams_fragment, container, false);
+        return inflater.inflate(R.layout.league_fixtures_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.epl_teams_list);
-        mList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.epl_fixtures_fragment_list);
+        recyclerView.setHasFixedSize(true);
+
+        map = new HashMap<>();
+        list = new ArrayList<>();
         volleyRequest = new VolleyRequest();
+        mAdapter = new LeagueFixtureFragmentAdapter(map, list, getContext());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new LeagueTeamsAdapter(mList, getContext());
         recyclerView.setAdapter(mAdapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                TeamsObject object = mList.get(position);
-                Intent intent = new Intent(getActivity(), PlayersActivity.class);
-                intent.putExtra("teamPlayers", object.getTeamPlayers());
-                intent.putExtra("teamLogo", object.getTeamLogo());
-                intent.putExtra("teamName", object.getName());
-                startActivity(intent);
-            }
-        }));
-
-        String URL = URLS.getLeagueTeamsURL("445");
+        String URL = URLS.getLeagueFixturesURL("452");
         makeRequest(URL);
-
     }
 
-    public void makeRequest(final String URL) {
+    public void makeRequest(String URL){
         volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
-                    JSONArray results = object.getJSONArray("teams");
-                    parseLeagueTeams.setData(results, mList);
+                    parseLeagueFixtures.setData(object.getJSONArray("fixtures"), map, list);
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

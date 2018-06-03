@@ -1,29 +1,27 @@
 package JSONParser;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import DataObjects.EPLTeamsObject;
+import DataObjects.TeamsObject;
 
 public class parseLeagueTeams {
-    public static void setData(JSONArray results, ArrayList<EPLTeamsObject> list) {
+    public static void setData(JSONArray results, ArrayList<TeamsObject> list) {
         for(int i = 0; i < results.length(); i++) {
             try {
                 JSONObject object = results.getJSONObject(i);
                 JSONObject links = object.getJSONObject("_links");
-                EPLTeamsObject eplTeamsObject = new EPLTeamsObject();
+                TeamsObject teamsObject = new TeamsObject();
 
-                eplTeamsObject.setName(object.getString("name"));
-                eplTeamsObject.setShortName(object.getString("shortName"));
-                eplTeamsObject.setTeamLogo(object.getString("crestUrl"));
-                eplTeamsObject.setTeamCode(object.getString("code"));
-                eplTeamsObject.setTeamPlayers(links.getJSONObject("players").getString("href"));
-                list.add(eplTeamsObject);
+                teamsObject.setName(object.getString("name"));
+                teamsObject.setShortName(object.getString("shortName"));
+                teamsObject.setTeamLogo(object.getString("crestUrl"));
+                teamsObject.setTeamCode(object.getString("code"));
+                teamsObject.setTeamPlayers(links.getJSONObject("players").getString("href"));
+                list.add(teamsObject);
             } catch (JSONException e ) {
                 e.printStackTrace();
             }

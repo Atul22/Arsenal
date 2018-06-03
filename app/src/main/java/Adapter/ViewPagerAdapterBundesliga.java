@@ -4,12 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import Fragments.EPLFragments.*;
+import Fragments.BundesLigaFragments.FixturesFragment;
+import Fragments.BundesLigaFragments.TableFragment;
+import Fragments.BundesLigaFragments.TeamsFragment;
 
-public class ViewPagerAdapterEPL extends FragmentPagerAdapter {
+public class ViewPagerAdapterBundesliga extends FragmentPagerAdapter {
     public String[] title = {"Table", "Fixtures", "Teams"};
 
-    public ViewPagerAdapterEPL(FragmentManager manager) {
+    public ViewPagerAdapterBundesliga(FragmentManager manager) {
         super(manager);
     }
 

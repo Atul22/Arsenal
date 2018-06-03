@@ -21,8 +21,12 @@
         </activity>
         <activity android:name=".VideosActivity" />
         <activity android:name=".EPLActivity" />
-        <activity android:name=".EPLPlayersActivity" />
-        <activity android:name=".DebateActivity"></activity>
+        <activity android:name=".PlayersActivity" />
+        <activity android:name=".DebateActivity" />
+        <activity android:name=".BundesLigaActivity"/>
+        <activity android:name=".LaLigaActivity"/>
+        <activity android:name=".SerieA_Activity"/>
+        <activity android:name=".Ligue1Activity"/>
     </application>
 
 </manifest>

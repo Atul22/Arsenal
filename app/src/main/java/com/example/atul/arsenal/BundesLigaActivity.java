@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import Adapter.ViewPagerAdapterEPL;
+import Adapter.ViewPagerAdapterBundesliga;
 
-public class EPLActivity extends AppCompatActivity {
+public class BundesLigaActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -29,7 +29,7 @@ public class EPLActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterEPL mAdapter = new ViewPagerAdapterEPL(getSupportFragmentManager());
+        ViewPagerAdapterBundesliga mAdapter = new ViewPagerAdapterBundesliga(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -37,7 +37,7 @@ public class EPLActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EPLActivity.this, MainActivity.class);
+                Intent intent = new Intent(BundesLigaActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

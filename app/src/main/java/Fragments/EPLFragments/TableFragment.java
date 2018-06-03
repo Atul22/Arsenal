@@ -19,17 +19,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import API.URLS;
-import Adapter.EPLTableAdapter;
+import Adapter.LeagueTableAdapter;
 import JSONParser.parseLeagueTable;
-import DataObjects.EPLTableObject;
-import Utils.HTTPStuff;
+import DataObjects.TableObject;
 import Utils.VolleyRequest;
 
 public class TableFragment extends Fragment {
-    ArrayList<EPLTableObject> mList;
+    ArrayList<TableObject> mList;
     int position;
     VolleyRequest volleyRequest;
-    EPLTableAdapter mAdapter;
+    LeagueTableAdapter mAdapter;
     RecyclerView recyclerView;
     String leagueTableUrl;
 
@@ -50,7 +49,7 @@ public class TableFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.epl_table_fragment, container, false);
+        return inflater.inflate(R.layout.league_table_fragment, container, false);
     }
 
     @Override
@@ -58,7 +57,6 @@ public class TableFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         volleyRequest = new VolleyRequest();
-        String URL = URLS.getEplURL();
         recyclerView = view.findViewById(R.id.epl_card_list);
         mList = new ArrayList<>();
 
@@ -67,9 +65,10 @@ public class TableFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new EPLTableAdapter(mList, getContext());
+        mAdapter = new LeagueTableAdapter(mList, getContext());
         recyclerView.setAdapter(mAdapter);
 
+        String URL = URLS.getLeagueURL("445");
         getLeagueTableUrl(URL);
     }
 

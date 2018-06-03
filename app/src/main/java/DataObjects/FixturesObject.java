@@ -1,6 +1,6 @@
 package DataObjects;
 
-public class EPLFixturesObject {
+public class FixturesObject {
     private String homeTeamName;
     private String awayTeamName;
     private String homeTeamLogo;

@@ -8,17 +8,18 @@ public class URLS {
                 "&channelId=" + channelId + "&part=snippet,id&order=date&maxResults=50";
     }
 
-    public static String getEplURL() {
-        return "http://api.football-data.org/v1/competitions/445";
+    public static String getLeagueURL(String competetionId) {
+        return "http://api.football-data.org/v1/competitions/" + competetionId;
     }
 
-    public static String getEplFixturesURL() {
-        return "http://api.football-data.org/v1/competitions/445/fixtures";
+    public static String getLeagueFixturesURL(String competetionId) {
+        return "http://api.football-data.org/v1/competitions/" + competetionId + "/fixtures";
     }
 
-    public static String getEplTeamsURL() {
-        return "http://api.football-data.org/v1/competitions/445/teams";
+    public static String getLeagueTeamsURL(String competetionId) {
+        return "http://api.football-data.org/v1/competitions/" + competetionId + "/teams";
     }
+
 
     public static String getNewsfeedUrl(String key, String date) {
         return "https://newsapi.org/v2/everything?sources=bbc-sport&q=football&from=" + date + "&sortBy=publishedAt&apiKey=" + key;
