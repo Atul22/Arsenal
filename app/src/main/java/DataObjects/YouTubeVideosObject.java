@@ -1,6 +1,6 @@
 package DataObjects;
 
-public class AFTVObject {
+public class YouTubeVideosObject {
     private String videoId;
     private String title;
     private String posterURL;

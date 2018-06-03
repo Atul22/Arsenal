@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, VideosActivity.class));
                 } else if (item.getTitle().toString().equals(getString(R.string.EPL))) {
                     startActivity(new Intent(MainActivity.this, EPLActivity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.debate))) {
+                    startActivity(new Intent(MainActivity.this, DebateActivity.class));
                 }
                 return true;
             }

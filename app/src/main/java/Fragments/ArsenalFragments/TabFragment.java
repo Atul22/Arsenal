@@ -19,8 +19,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import Adapter.ContactAdapter;
-import DataObjects.AFTVObject;
+import Adapter.YouTubeAdapter;
+import DataObjects.YouTubeVideosObject;
 import JSONParser.parseAFTV;
 import Utils.HTTPStuff;
 import API.Channels;
@@ -28,9 +28,9 @@ import API.KEYS;
 import API.URLS;
 
 public class TabFragment extends Fragment {
-    private static ArrayList<AFTVObject> list;
+    private static ArrayList<YouTubeVideosObject> list;
     int position;
-    ContactAdapter mAdapter;
+    YouTubeAdapter mAdapter;
     RecyclerView recyclerView;
     KEYS key;
     Channels channel;
@@ -66,14 +66,14 @@ public class TabFragment extends Fragment {
         key = new KEYS();
         channel = new Channels();
         httpStuff = new HTTPStuff();
-        nextPageToken = new String();
+        nextPageToken = "";
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ContactAdapter(list);
+        mAdapter = new YouTubeAdapter(list);
         recyclerView.setAdapter(mAdapter);
 
         String URL = URLS.getPageURL(key.getKEY(), channel.getChannelId(), "");
@@ -81,7 +81,7 @@ public class TabFragment extends Fragment {
         makeRequest(URL);
     }
 
-    public void makeRequest(final String URL) {
+    public void makeRequest(String URL) {
         httpStuff.getData(URL, new HTTPStuff.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
@@ -89,7 +89,7 @@ public class TabFragment extends Fragment {
                     JSONObject object = new JSONObject(data);
                     nextPageToken = object.getString("nextPageToken");
                     JSONArray results = object.getJSONArray("items");
-                    parseAFTV.setData(results, list);
+                    parseAFTV.setData(results, list, "videos");
 
                     mAdapter.notifyDataSetChanged();
                     if (object.getString("nextPageToken") != null) {

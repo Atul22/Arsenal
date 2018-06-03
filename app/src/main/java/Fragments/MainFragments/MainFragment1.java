@@ -89,11 +89,12 @@ public class MainFragment1 extends Fragment {
                 String url = object.getArticleUrl();
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                final Bitmap backButton = BitmapFactory.decodeResource(getResources(), R.drawable.ic_keyboard_backspace_black_24dp);
+                builder.setCloseButtonIcon(backButton);
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.launchUrl(getContext(), Uri.parse(url));
             }
         }));
-
     }
 
     public void getTotalResults(final String URL) {

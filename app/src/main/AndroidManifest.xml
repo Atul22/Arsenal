@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".VideosActivity" />
         <activity android:name=".EPLActivity" />
-        <activity android:name=".EPLPlayersActivity"></activity>
+        <activity android:name=".EPLPlayersActivity" />
+        <activity android:name=".DebateActivity"></activity>
     </application>
 
 </manifest>

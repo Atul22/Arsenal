@@ -15,14 +15,14 @@ import com.example.atul.arsenal.R;
 
 import java.util.ArrayList;
 
-import DataObjects.AFTVObject;
+import DataObjects.YouTubeVideosObject;
 
 import static android.content.ContentValues.TAG;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.AFTVViewHolder> {
-    private ArrayList<AFTVObject> videoList;
-    public ContactAdapter( ArrayList<AFTVObject> list) {
-        Log.d(TAG, "ContactAdapter: " + list);
+public class YouTubeAdapter extends RecyclerView.Adapter<YouTubeAdapter.YouTubeViewHolder> {
+    private ArrayList<YouTubeVideosObject> videoList;
+    public YouTubeAdapter(ArrayList<YouTubeVideosObject> list) {
+        Log.d(TAG, "YouTubeAdapter: " + list);
         videoList = list;
     }
 
@@ -32,26 +32,26 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.AFTVView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AFTVViewHolder aftvViewHolder, int i) {
-        AFTVObject object = videoList.get(i);
+    public void onBindViewHolder(@NonNull YouTubeViewHolder youTubeViewHolder, int i) {
+        YouTubeVideosObject object = videoList.get(i);
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-        aftvViewHolder.title.setText(object.getTitle());
-        aftvViewHolder.thumbnail.setImageUrl(object.getHighPosterURL(), imageLoader);
+        youTubeViewHolder.title.setText(object.getTitle());
+        youTubeViewHolder.thumbnail.setImageUrl(object.getHighPosterURL(), imageLoader);
     }
 
     @NonNull
     @Override
-    public AFTVViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public YouTubeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.card_layout, parent, false);
-        return new AFTVViewHolder(itemView);
+        return new YouTubeViewHolder(itemView);
     }
 
-    public static class AFTVViewHolder extends RecyclerView.ViewHolder {
+    public static class YouTubeViewHolder extends RecyclerView.ViewHolder {
         protected TextView title;
         protected NetworkImageView thumbnail;
 
-        public AFTVViewHolder(View v) {
+        public YouTubeViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
             thumbnail = v.findViewById(R.id.thumbnail);
