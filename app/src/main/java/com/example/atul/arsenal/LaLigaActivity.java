@@ -9,8 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import Adapter.ViewPagerAdapterBundesliga;
-import Adapter.ViewPagerAdapterLaLiga;
+import Adapter.ViewPagerAdapterLeague;
 
 public class LaLigaActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -31,7 +30,7 @@ public class LaLigaActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterLaLiga mAdapter = new ViewPagerAdapterLaLiga(getSupportFragmentManager());
+        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), "455");
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);

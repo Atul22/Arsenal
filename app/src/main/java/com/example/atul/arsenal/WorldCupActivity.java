@@ -1,17 +1,17 @@
 package com.example.atul.arsenal;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import Adapter.ViewPagerAdapterLeague;
 
-public class BundesLigaActivity extends AppCompatActivity {
+public class WorldCupActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -29,7 +29,7 @@ public class BundesLigaActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), "452");
+        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), "467");
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -37,7 +37,7 @@ public class BundesLigaActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BundesLigaActivity.this, MainActivity.class);
+                Intent intent = new Intent(WorldCupActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

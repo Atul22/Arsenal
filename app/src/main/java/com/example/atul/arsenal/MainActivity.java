@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, SerieA_Activity.class));
                 } else if(item.getTitle().toString().equals(getString(R.string.ligue1))) {
                     startActivity(new Intent(MainActivity.this, Ligue1Activity.class));
+                } else if(item.getTitle().toString().equals(getString(R.string.wc))) {
+                    startActivity(new Intent(MainActivity.this, WorldCupActivity.class));
                 }
                 return true;
             }

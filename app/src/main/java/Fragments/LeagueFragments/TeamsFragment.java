@@ -1,4 +1,4 @@
-package Fragments.Ligue1Fragments;
+package Fragments.LeagueFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,13 +29,15 @@ import Utils.VolleyRequest;
 public class TeamsFragment extends Fragment {
     ArrayList<TeamsObject> mList;
     int position;
+    private String leagueId;
     RecyclerView recyclerView;
     LeagueTeamsAdapter mAdapter;
     VolleyRequest volleyRequest;
 
-    public static android.support.v4.app.Fragment getInstance(int position) {
+    public static Fragment getInstance(int position, String leagueId) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
+        bundle.putString("leagueId", leagueId);
         TeamsFragment teamsFragment = new TeamsFragment();
         teamsFragment.setArguments(bundle);
         return teamsFragment;
@@ -46,6 +48,7 @@ public class TeamsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
         position = getArguments().getInt("pos");
+        leagueId = getArguments().getString("leagueId");
     }
 
     @Override
@@ -81,7 +84,7 @@ public class TeamsFragment extends Fragment {
             }
         }));
 
-        String URL = URLS.getLeagueTeamsURL("450");
+        String URL = URLS.getLeagueTeamsURL(leagueId);
         makeRequest(URL);
 
     }

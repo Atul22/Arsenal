@@ -1,4 +1,4 @@
-package Fragments.LaLigaFragments;
+package Fragments.LeagueFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,15 +25,17 @@ import Utils.VolleyRequest;
 
 public class FixturesFragment extends Fragment {
     int position;
+    private String leagueId;
     RecyclerView recyclerView;
     HashMap<String, ArrayList<FixturesObject>> map;
     private ArrayList<String> list;
     LeagueFixtureFragmentAdapter mAdapter;
     VolleyRequest volleyRequest;
 
-    public static Fragment getInstance(int position) {
+    public static Fragment getInstance(int position, String leagueId) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
+        bundle.putString("leagueId", leagueId);
         FixturesFragment fixturesFragment = new FixturesFragment();
         fixturesFragment.setArguments(bundle);
         return fixturesFragment;
@@ -44,6 +46,7 @@ public class FixturesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
         position = getArguments().getInt("pos");
+        leagueId = getArguments().getString("leagueId");
     }
 
     @Override
@@ -67,9 +70,10 @@ public class FixturesFragment extends Fragment {
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+
         recyclerView.setAdapter(mAdapter);
 
-        String URL = URLS.getLeagueFixturesURL("455");
+        String URL = URLS.getLeagueFixturesURL(leagueId);
         makeRequest(URL);
     }
 

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import Adapter.ViewPagerAdapterEPL;
+import Adapter.ViewPagerAdapterLeague;
 
 public class EPLActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -29,7 +29,7 @@ public class EPLActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterEPL mAdapter = new ViewPagerAdapterEPL(getSupportFragmentManager());
+        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), "445");
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);

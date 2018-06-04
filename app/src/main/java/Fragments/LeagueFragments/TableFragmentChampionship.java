@@ -1,16 +1,15 @@
-package Fragments.BundesLigaFragments;
+package Fragments.LeagueFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.atul.arsenal.PlayersActivity;
 import com.example.atul.arsenal.R;
 
 import org.json.JSONArray;
@@ -20,24 +19,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import API.URLS;
-import Adapter.LeagueTeamsAdapter;
-import DataObjects.TeamsObject;
-import JSONParser.parseLeagueTeams;
-import Utils.RecyclerItemClickListener;
+import Adapter.LeagueTableAdapter;
+import DataObjects.TableObject;
 import Utils.VolleyRequest;
 
-public class TeamsFragment extends Fragment {
-    ArrayList<TeamsObject> mList;
+public class TableFragmentChampionship extends Fragment {
+    ArrayList<TableObject> mList;
     int position;
-    RecyclerView recyclerView;
-    LeagueTeamsAdapter mAdapter;
+    String leagueId = "";
     VolleyRequest volleyRequest;
-    public static Fragment getInstance(int position) {
+    LeagueTableAdapter mAdapter;
+    RecyclerView recyclerView;
+    String leagueTableUrl;
+
+    public static Fragment getInstance(int position, String leagueId) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
-        TeamsFragment teamsFragment = new TeamsFragment();
-        teamsFragment.setArguments(bundle);
-        return teamsFragment;
+        bundle.putString("leagueId", leagueId );
+        TableFragment tableFragment = new TableFragment();
+        tableFragment.setArguments(bundle);
+        return tableFragment;
     }
 
     @Override
@@ -45,54 +46,59 @@ public class TeamsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
         position = getArguments().getInt("pos");
+        leagueId = getArguments().getString("leagueId");
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.league_teams_fragment, container, false);
+        return inflater.inflate(R.layout.league_table_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.epl_teams_list);
-        mList = new ArrayList<>();
         volleyRequest = new VolleyRequest();
+        recyclerView = view.findViewById(R.id.epl_card_list);
+        mList = new ArrayList<>();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new LeagueTeamsAdapter(mList, getContext());
+        mAdapter = new LeagueTableAdapter(mList, getContext());
         recyclerView.setAdapter(mAdapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                TeamsObject object = mList.get(position);
-                Intent intent = new Intent(getActivity(), PlayersActivity.class);
-                intent.putExtra("teamPlayers", object.getTeamPlayers());
-                intent.putExtra("teamLogo", object.getTeamLogo());
-                intent.putExtra("teamName", object.getName());
-                startActivity(intent);
-            }
-        }));
-
-        String URL = URLS.getLeagueTeamsURL("452");
-        makeRequest(URL);
-
+        String URL = URLS.getLeagueURL(leagueId);
+        getLeagueTableUrl(URL);
     }
 
-    public void makeRequest(final String URL) {
+    public void getLeagueTableUrl(final String URL) {
         volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
-                    JSONArray results = object.getJSONArray("teams");
-                    parseLeagueTeams.setData(results, mList);
+                    JSONObject links = object.getJSONObject("_links");
+                    leagueTableUrl = links.getJSONObject("leagueTable").getString("href");
+                    makeRequest(leagueTableUrl);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void makeRequest(final String URL) {
+        Log.v("JSON4", "url = " + URL);
+        volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
+            @Override
+            public void onSuccess(String data) {
+                try {
+                    JSONObject object = new JSONObject(data);
+                    JSONArray results = object.getJSONArray("standing");
+                    //parseLeagueTable.setData(results, mList);
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

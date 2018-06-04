@@ -4,25 +4,29 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import Fragments.LaLigaFragments.*;
+import Fragments.LeagueFragments.*;
 
-public class ViewPagerAdapterLaLiga extends FragmentPagerAdapter {
+public class ViewPagerAdapterLeague extends FragmentPagerAdapter {
     public String[] title = {"Table", "Fixtures", "Teams"};
+    private String leagueId;
 
-    public ViewPagerAdapterLaLiga(FragmentManager manager) {
+    public ViewPagerAdapterLeague(FragmentManager manager, String id) {
         super(manager);
+        leagueId = id;
     }
 
     @Override
     public Fragment getItem(int position) {
         if(position == 0) {
-            return TableFragment.getInstance(position);
+            if(!leagueId.equals("467"))
+                return TableFragment.getInstance(position, leagueId);
+            return TeamsFragment.getInstance(position, leagueId);
         }
         else if(position == 1) {
-            return FixturesFragment.getInstance(position);
+            return FixturesFragment.getInstance(position, leagueId);
         }
         else {
-            return TeamsFragment.getInstance(position);
+            return TeamsFragment.getInstance(position, leagueId);
         }
     }
 
