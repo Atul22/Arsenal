@@ -1,3 +1,6 @@
+/**
+ * Common adapter for league fixtures and championship table
+ */
 package Adapter;
 
 import android.content.Context;
@@ -15,15 +18,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import DataObjects.FixturesObject;
+import DataObjects.TableObjectWC;
 
-public class LeagueFixtureFragmentAdapter extends RecyclerView.Adapter<LeagueFixtureFragmentAdapter.EPLFixtureFragmentRowHolder>{
+public class LeagueFragmentAdapterCommon extends RecyclerView.Adapter<LeagueFragmentAdapterCommon.EPLFixtureFragmentRowHolder>{
     private ArrayList<String> parentList;
     private HashMap<String, ArrayList<FixturesObject>> map;
+    private HashMap<String, ArrayList<TableObjectWC>> mapWC;
+    private String leagueId = "";
     private Context mContext;
-    public LeagueFixtureFragmentAdapter(HashMap<String, ArrayList<FixturesObject>> list, ArrayList<String> list1, Context context) {
+
+    public LeagueFragmentAdapterCommon(HashMap<String, ArrayList<FixturesObject>> list, ArrayList<String> list1, Context context) {
         mContext = context;
         parentList = list1;
         map = list;
+    }
+
+    //id is passed to avoid erasure conflict while overloading
+    public LeagueFragmentAdapterCommon(HashMap<String, ArrayList<TableObjectWC>> list, ArrayList<String> list1, Context context, String id) {
+        mContext = context;
+        parentList = list1;
+        mapWC = list;
+        leagueId = id;
     }
 
     @Override
@@ -32,19 +47,29 @@ public class LeagueFixtureFragmentAdapter extends RecyclerView.Adapter<LeagueFix
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LeagueFixtureFragmentAdapter.EPLFixtureFragmentRowHolder viewHolder, int i) {
-        String matchDay = parentList.get(i);
-        viewHolder.textView.setText(matchDay);
-
+    public void onBindViewHolder(@NonNull LeagueFragmentAdapterCommon.EPLFixtureFragmentRowHolder viewHolder, int i) {
         viewHolder.recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         viewHolder.recyclerView.setLayoutManager(layoutManager);
-        LeagueFixtureListAdapter mAdapter = new LeagueFixtureListAdapter(map.get(matchDay), mContext);
-        viewHolder.recyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+
+        if(!leagueId.equals("")) {
+            String group = parentList.get(i);
+            viewHolder.textView.setText(group);
+
+            LeagueListAdapterCommon mAdapter = new LeagueListAdapterCommon(mapWC.get(group), mContext, leagueId);
+            viewHolder.recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+
+        } else {
+            String matchDay = parentList.get(i);
+            viewHolder.textView.setText(matchDay);
+
+            LeagueListAdapterCommon mAdapter = new LeagueListAdapterCommon(map.get(matchDay), mContext);
+            viewHolder.recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @NonNull

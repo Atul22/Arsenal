@@ -18,9 +18,10 @@ public class ViewPagerAdapterLeague extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if(position == 0) {
-            if(!leagueId.equals("467"))
-                return TableFragment.getInstance(position, leagueId);
-            return TeamsFragment.getInstance(position, leagueId);
+            if(leagueId.equals("467")) {
+                return TableFragmentChampionship.getInstance(position, leagueId);
+            }
+            return TableFragment.getInstance(position, leagueId);
         }
         else if(position == 1) {
             return FixturesFragment.getInstance(position, leagueId);

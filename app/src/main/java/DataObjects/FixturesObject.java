@@ -13,19 +13,19 @@ public class FixturesObject {
     private String matchDay;
     private String status;
 
-    public String gethomeTeamName() {
+    public String getHomeTeamName() {
         return homeTeamName;
     }
 
-    public void sethomeTeamName(String homeTeamName) {
+    public void setHomeTeamName(String homeTeamName) {
         this.homeTeamName = homeTeamName;
     }
 
-    public String getawayTeamName() {
+    public String getAwayTeamName() {
         return awayTeamName;
     }
 
-    public void setawayTeamName(String awayTeamName) {
+    public void setAwayTeamName(String awayTeamName) {
         this.awayTeamName = awayTeamName;
     }
 

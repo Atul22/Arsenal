@@ -17,28 +17,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import API.URLS;
-import Adapter.LeagueTableAdapter;
-import DataObjects.TableObject;
+import Adapter.LeagueFragmentAdapterCommon;
+import DataObjects.TableObjectWC;
+import JSONParser.parseLeagueFixtures;
 import Utils.VolleyRequest;
 
 public class TableFragmentChampionship extends Fragment {
-    ArrayList<TableObject> mList;
     int position;
-    String leagueId = "";
-    VolleyRequest volleyRequest;
-    LeagueTableAdapter mAdapter;
+    private String leagueId;
     RecyclerView recyclerView;
-    String leagueTableUrl;
+    HashMap<String, ArrayList<TableObjectWC>> map;
+    private ArrayList<String> list;
+    LeagueFragmentAdapterCommon mAdapter;
+    VolleyRequest volleyRequest;
+    private String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
     public static Fragment getInstance(int position, String leagueId) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
-        bundle.putString("leagueId", leagueId );
-        TableFragment tableFragment = new TableFragment();
-        tableFragment.setArguments(bundle);
-        return tableFragment;
+        bundle.putString("leagueId", leagueId);
+        TableFragmentChampionship fragment = new TableFragmentChampionship();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -51,54 +54,46 @@ public class TableFragmentChampionship extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.league_table_fragment, container, false);
+        return inflater.inflate(R.layout.league_fixtures_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        recyclerView = view.findViewById(R.id.epl_fixtures_fragment_list);
+        recyclerView.setHasFixedSize(true);
+
+        map = new HashMap<>();
+        list = new ArrayList<>();
         volleyRequest = new VolleyRequest();
-        recyclerView = view.findViewById(R.id.epl_card_list);
-        mList = new ArrayList<>();
+        mAdapter = new LeagueFragmentAdapterCommon(map, list, getContext(), leagueId);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new LeagueTableAdapter(mList, getContext());
         recyclerView.setAdapter(mAdapter);
 
-        String URL = URLS.getLeagueURL(leagueId);
-        getLeagueTableUrl(URL);
+        String URL = URLS.getLeagueCompetetionUrl(leagueId);
+        makeRequest(URL);
     }
 
-    public void getLeagueTableUrl(final String URL) {
+    public void makeRequest(String URL){
+        Log.v("worldcup", URL);
         volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
             @Override
             public void onSuccess(String data) {
                 try {
                     JSONObject object = new JSONObject(data);
-                    JSONObject links = object.getJSONObject("_links");
-                    leagueTableUrl = links.getJSONObject("leagueTable").getString("href");
-                    makeRequest(leagueTableUrl);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public void makeRequest(final String URL) {
-        Log.v("JSON4", "url = " + URL);
-        volleyRequest.getData(URL, new VolleyRequest.VolleyCallBack() {
-            @Override
-            public void onSuccess(String data) {
-                try {
-                    JSONObject object = new JSONObject(data);
-                    JSONArray results = object.getJSONArray("standing");
-                    //parseLeagueTable.setData(results, mList);
+                    JSONObject standings = object.getJSONObject("standings");
+                    Log.v("worldcup", standings.toString());
+                    for(int i = 0; i < standings.length(); i++) {
+                        JSONArray groupArray = standings.getJSONArray(groups[i]);
+                        Log.v("worldcup:", groupArray.toString());
+                        parseLeagueFixtures.setChampionshipData(groupArray, map, list);
+                    }
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

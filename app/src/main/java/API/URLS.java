@@ -8,8 +8,8 @@ public class URLS {
                 "&channelId=" + channelId + "&part=snippet,id&order=date&maxResults=50";
     }
 
-    public static String getLeagueCompetetionUrl() {
-        return "http://api.football-data.org/v1/competitions/";
+    public static String getLeagueCompetetionUrl(String competetionId) {
+        return "http://api.football-data.org/v1/competitions/" + competetionId + "/leagueTable";
     }
 
     public static String getLeagueURL(String competetionId) {

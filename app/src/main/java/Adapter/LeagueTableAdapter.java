@@ -31,7 +31,7 @@ import SvgUtils.SvgSoftwareLayerSetter;
 import Utils.AppController;
 import DataObjects.TableObject;
 
-public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.EPLTableRowHolder>{
+public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.LeagueTableRowHolder>{
     private ArrayList<TableObject> tableList;
     private Context mContext;
     public LeagueTableAdapter(ArrayList<TableObject> list, Context context) {
@@ -45,11 +45,9 @@ public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EPLTableRowHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull LeagueTableRowHolder viewHolder, int i) {
         TableObject object = tableList.get(i);
-        //ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         viewHolder.position.setText(object.getPosition());
-        //viewHolder.teamLogo.setImageUrl(object.getLogo(), imageLoader);
         viewHolder.teamName.setText(object.getTeamName());
         viewHolder.gamesPlayed.setText(object.getGamesPlayed());
         viewHolder.gamesWon.setText(object.getGamesWon());
@@ -68,13 +66,13 @@ public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.
 
     @NonNull
     @Override
-    public EPLTableRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LeagueTableRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.league_table_row, parent, false);
-        return new EPLTableRowHolder(itemView);
+        return new LeagueTableRowHolder(itemView);
     }
 
-    public static class EPLTableRowHolder extends RecyclerView.ViewHolder {
+    public static class LeagueTableRowHolder extends RecyclerView.ViewHolder {
         protected TextView position;
         protected NetworkImageView teamLogo;
         protected ImageView teamLogo1;
@@ -85,7 +83,7 @@ public class LeagueTableAdapter extends RecyclerView.Adapter<LeagueTableAdapter.
         protected TextView goalDiff;
         protected TextView points;
 
-        private EPLTableRowHolder(View v) {
+        private LeagueTableRowHolder(View v) {
             super(v);
             position = v.findViewById(R.id.epl_position);
             teamLogo = v.findViewById(R.id.epl_team_logo);

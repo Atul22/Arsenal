@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import API.URLS;
-import Adapter.LeagueFixtureFragmentAdapter;
+import Adapter.LeagueFragmentAdapterCommon;
 import DataObjects.FixturesObject;
 import JSONParser.parseLeagueFixtures;
 import Utils.VolleyRequest;
@@ -29,7 +29,7 @@ public class FixturesFragment extends Fragment {
     RecyclerView recyclerView;
     HashMap<String, ArrayList<FixturesObject>> map;
     private ArrayList<String> list;
-    LeagueFixtureFragmentAdapter mAdapter;
+    LeagueFragmentAdapterCommon mAdapter;
     VolleyRequest volleyRequest;
 
     public static Fragment getInstance(int position, String leagueId) {
@@ -64,7 +64,7 @@ public class FixturesFragment extends Fragment {
         map = new HashMap<>();
         list = new ArrayList<>();
         volleyRequest = new VolleyRequest();
-        mAdapter = new LeagueFixtureFragmentAdapter(map, list, getContext());
+        mAdapter = new LeagueFragmentAdapterCommon(map, list, getContext());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
