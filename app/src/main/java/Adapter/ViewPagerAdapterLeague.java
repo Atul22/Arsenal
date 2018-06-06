@@ -4,11 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import API.LeagueId;
 import Fragments.LeagueFragments.*;
 
 public class ViewPagerAdapterLeague extends FragmentPagerAdapter {
     public String[] title = {"Table", "Fixtures", "Teams"};
     private String leagueId;
+    private LeagueId id = new LeagueId();
 
     public ViewPagerAdapterLeague(FragmentManager manager, String id) {
         super(manager);
@@ -18,7 +20,7 @@ public class ViewPagerAdapterLeague extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if(position == 0) {
-            if(leagueId.equals("467")) {
+            if(leagueId.equals(id.getWorldCup()) || leagueId.equals(id.getChampionsLeague())) {
                 return TableFragmentChampionship.getInstance(position, leagueId);
             }
             return TableFragment.getInstance(position, leagueId);

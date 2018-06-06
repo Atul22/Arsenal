@@ -28,6 +28,7 @@
         <activity android:name=".SerieA_Activity"/>
         <activity android:name=".Ligue1Activity"/>
         <activity android:name=".WorldCupActivity"/>
+        <activity android:name=".ChampionsLeagueActivity"/>
     </application>
 
 </manifest>

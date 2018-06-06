@@ -26,6 +26,10 @@
             android:icon="@android:drawable/ic_menu_gallery"
             android:title="@string/wc" />
         <item
+            android:id="@+id/nav_cl"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/cl" />
+        <item
             android:id="@+id/nav_slideshow"
             android:icon="@android:drawable/ic_media_play"
             android:title="@string/arsenal" />

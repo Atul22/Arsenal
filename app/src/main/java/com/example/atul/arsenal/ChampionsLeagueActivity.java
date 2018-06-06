@@ -12,7 +12,7 @@ import android.view.View;
 import API.LeagueId;
 import Adapter.ViewPagerAdapterLeague;
 
-public class WorldCupActivity extends AppCompatActivity {
+public class ChampionsLeagueActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -32,7 +32,7 @@ public class WorldCupActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), leagueId.getWorldCup());
+        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), leagueId.getChampionsLeague());
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -40,7 +40,7 @@ public class WorldCupActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WorldCupActivity.this, MainActivity.class);
+                Intent intent = new Intent(ChampionsLeagueActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

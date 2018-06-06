@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import API.LeagueId;
 import Adapter.ViewPagerAdapterLeague;
 
 public class EPLActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    LeagueId leagueId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +25,14 @@ public class EPLActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.epl_toolbar);
         tabLayout = findViewById(R.id.epl_tabs);
         viewPager = findViewById(R.id.epl_viewpager);
+        leagueId = new LeagueId();
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), "445");
+        ViewPagerAdapterLeague mAdapter = new ViewPagerAdapterLeague(getSupportFragmentManager(), leagueId.getEPL());
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
